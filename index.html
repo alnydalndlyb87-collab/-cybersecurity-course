@@ -5,26 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>كورس الأمن السيبراني</title>
 <style>
-body{margin:0;font-family:Arial;background:#020a1a;color:#fff;text-align:center}
-.hero{padding:30px 18px;background:radial-gradient(ellipse at center top,#0a2a5a,#020a1a 70%)}
-.hero img{width:100%;max-width:380px;border-radius:22px;box-shadow:0 0 50px rgba(0,150,255,0.5)}
-h1{color:#7de8f0;font-size:28px;margin:20px 0}
-.sub{color:#b8c5c0;margin:15px 0 25px}
-.btn{display:block;background:linear-gradient(90deg,#00d4ff,#00ff88);color:#000;padding:16px;border-radius:40px;text-decoration:none;font-weight:bold;max-width:340px;margin:20px auto}
-.card{background:#111a33;margin:15px;padding:18px;border-radius:16px;text-align:right;border:1px solid #1a2a5a}
+body{margin:0;font-family:Arial;background:#020a1a;color:#fff;text-align:center;overflow-x:hidden}
+.hero{position:relative;padding:30px 18px 40px;overflow:hidden;min-height:85vh}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center top,#0a2a5a 0%, #0a4a3a 30%, #020a1a 70%);animation:bgPulse 4s ease-in-out infinite}
+@keyframes bgPulse{0%,100%{opacity:1}50%{opacity:0.8;transform:scale(1.05)}}
+.particles{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+.particle{position:absolute;width:2px;height:2px;background:#00ff88;border-radius:50%;box-shadow:0 0 8px #00ff88;animation:float 8s linear infinite}
+@keyframes float{0%{transform:translateY(100vh) translateX(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh) translateX(100px);opacity:0}}
+.hero img{position:relative;z-index:2;width:100%;max-width:380px;border-radius:22px;box-shadow:0 0 50px rgba(0,255,180,0.6), 0 0 100px rgba(0,150,255,0.3);animation:glow 2.5s ease-in-out infinite alternate;border:1px solid rgba(0,255,180,0.3)}
+@keyframes glow{0%{box-shadow:0 0 40px rgba(0,255,180,0.5)}100%{box-shadow:0 0 70px rgba(0,255,180,0.8), 0 0 100px rgba(0,200,255,0.4)}}
+h1{position:relative;z-index:2;color:#7de8f0;font-size:28px;margin:22px 0;text-shadow:0 0 20px rgba(125,232,240,0.6);animation:titleGlow 3s ease-in-out infinite}
+@keyframes titleGlow{0%,100%{text-shadow:0 0 15px rgba(125,232,240,0.5)}50%{text-shadow:0 0 30px rgba(125,232,240,0.9)}}
+.sub{position:relative;z-index:2;color:#b8c5c0;margin:15px 0 25px}
+.btn{position:relative;z-index:2;display:block;background:linear-gradient(90deg,#00d4ff,#00ff88);background-size:200% 100%;color:#000;padding:16px;border-radius:40px;text-decoration:none;font-weight:bold;max-width:340px;margin:20px auto;animation:btnMove 3s linear infinite;box-shadow:0 5px 25px rgba(0,255,136,0.4)}
+@keyframes btnMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.card{position:relative;z-index:2;background:rgba(17,26,51,0.8);backdrop-filter:blur(10px);margin:15px;padding:18px;border-radius:16px;text-align:right;border:1px solid rgba(0,255,180,0.15);animation:cardFloat 4s ease-in-out infinite}
+@keyframes cardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 </style>
 </head>
 <body>
 <div class="hero">
+<div class="particles" id="particles"></div>
 <img src="cover.png">
 <h1>🛡️ كورس الأمن السيبراني الشامل</h1>
 <div class="sub">من الصفر للاحتراف - حماية • اختراق أخلاقي • شبكات</div>
 <a class="btn" href="https://wa.me/967777517760">🚀 سجل في الكورس الآن</a>
+<div style="padding:20px;position:relative;z-index:2">
+<div class="card">🔥 <b>ماذا ستتعلم؟</b><br>• أساسيات الحماية والتشفير<br>• أدوات Nmap - Metasploit - Wireshark<br>• حماية المواقع والشبكات</div>
+<div class="card">🎓 <b>لمن هذا الكورس؟</b><br>• أصحاب الشركات<br>• المبتدئين في الأمن السيبراني</div>
 </div>
-<div style="padding:20px">
-<div class="card">🔥 <b>ماذا ستتعلم؟</b><br>• أساسيات الحماية والتشفير<br>• أدوات Nmap - Metasploit - Wireshark<br>• حماية المواقع والشبكات<br>• اختبار الاختراق الأخلاقي</div>
-<div class="card">🎓 <b>لمن هذا الكورس؟</b><br>• أصحاب الشركات<br>• المبتدئين في الأمن السيبراني<br>• مطورين ومدراء IT</div>
-<a class="btn" href="https://wa.me/967777517760">💬 تواصل واتساب</a>
 </div>
+<script>
+// إنشاء جسيمات متحركة
+const container=document.getElementById('particles');
+for(let i=0;i<25;i++){
+let p=document.createElement('div');
+p.className='particle';
+p.style.left=Math.random()*100+'%';
+p.style.animationDelay=Math.random()*8+'s';
+p.style.animationDuration=(6+Math.random()*6)+'s';
+container.appendChild(p);
+}
+</script>
 </body>
 </html>
